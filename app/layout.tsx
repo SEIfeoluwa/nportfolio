@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 
@@ -10,6 +10,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const ledgerSerif = Source_Serif_4({
+  variable: "--font-ledger-serif",
   subsets: ["latin"],
 });
 
@@ -29,37 +34,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${ledgerSerif.variable} antialiased`}
       >
-        <header className="border-b border-zinc-200 bg-white/80 backdrop-blur">
-          <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-            <div className="flex items-center gap-6">
-              <Link href="/" className="text-lg font-semibold text-zinc-900">
-                Ifeoluwa Adebisi
+        <header className="border-b-4 border-double border-rule-strong bg-paper-elevated">
+          <nav className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5">
+            <Link href="/" className="font-serif text-lg font-semibold text-ink">
+              Ifeoluwa Adebisi
+            </Link>
+            <div className="ledger-label flex items-center gap-6 text-xs text-ink-muted">
+              <Link href="/#projects" className="hover:text-accent">
+                Projects
               </Link>
-              <a
-                href="https://github.com/SEIfeoluwa"
-                className="text-sm font-medium text-zinc-700 hover:text-zinc-900"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/seii/"
-                className="text-sm font-medium text-zinc-700 hover:text-zinc-900"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </a>
-            </div>
-            <div className="flex items-center gap-6 text-sm font-medium text-zinc-700">
-              <Link href="/" className="hover:text-zinc-900">
-                Home
+              <Link href="/#experience" className="hover:text-accent">
+                Experience
               </Link>
-              <Link href="/contact" className="hover:text-zinc-900">
-                Contact Me!
+              <Link href="/#skills" className="hover:text-accent">
+                Skills
+              </Link>
+              <Link href="/#contact" className="hover:text-accent">
+                Contact
               </Link>
             </div>
           </nav>
