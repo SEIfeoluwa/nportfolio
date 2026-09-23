@@ -10,6 +10,7 @@ const email = "adebisi.dev@icloud.com";
 const socialLinks = [
   { label: "GitHub", href: "https://github.com/SEIfeoluwa" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/seii/" },
+  { label: "Portfolio", href: "https://ifeoluwadebisi.dev" },
 ];
 
 export default function Home() {

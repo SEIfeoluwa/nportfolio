@@ -7,7 +7,7 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   return (
-    <article className="grid grid-cols-[3rem_1fr] gap-4 py-6 first:pt-0 last:pb-0">
+    <article className="grid grid-cols-[3rem_1fr] gap-4 py-6">
       <span className="font-mono text-sm text-ink-faint">
         {String(index).padStart(2, "0")}
       </span>
