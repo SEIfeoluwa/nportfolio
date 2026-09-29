@@ -2,43 +2,37 @@ import type { Experience } from "../data/experience";
 
 type ExperienceRowProps = {
   experience: Experience;
-  index: number;
 };
 
-export default function ExperienceRow({ experience, index }: ExperienceRowProps) {
+export default function ExperienceRow({ experience }: ExperienceRowProps) {
   return (
-    <article className="grid grid-cols-[3rem_1fr] gap-4 py-6">
-      <span className="font-mono text-sm text-ink-faint">
-        {String(index).padStart(2, "0")}
-      </span>
-      <div>
-        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-          <h3 className="font-serif text-lg font-semibold text-ink">
-            {experience.role} · {experience.company}
-          </h3>
-          <span className="ledger-label text-xs text-ink-faint">
-            {experience.period}
-          </span>
-        </div>
-        <p className="ledger-label mt-1 text-[11px] text-ink-faint">
-          {experience.location}
-        </p>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-muted">
-          {experience.summary}
-        </p>
-        {experience.tags && experience.tags.length ? (
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {experience.tags.map((tag) => (
-              <li
-                key={tag}
-                className="ledger-label rounded-sm border border-rule px-2.5 py-1 text-[11px] text-ink-muted"
-              >
-                {tag}
-              </li>
-            ))}
-          </ul>
-        ) : null}
+    <article>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+        <h3 className="text-lg font-semibold leading-tight text-ink">
+          {experience.company}
+        </h3>
+        <span className="text-sm tabular-nums text-ink-faint">
+          {experience.period}
+        </span>
       </div>
+      <p className="mt-1 text-sm text-ink-muted">
+        {experience.role} · {experience.location}
+      </p>
+      <p className="mt-4 max-w-xl leading-7 text-ink-muted">
+        {experience.summary}
+      </p>
+      {experience.tags && experience.tags.length ? (
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {experience.tags.map((tag) => (
+            <li
+              key={tag}
+              className="rounded-full border border-rule px-2.5 py-0.5 text-xs text-ink-muted"
+            >
+              {tag}
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </article>
   );
 }

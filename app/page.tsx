@@ -1,9 +1,10 @@
-import CopyEmailButton from "./components/copy-email-button";
+import Image from "next/image";
+import EducationList from "./components/education-list";
 import ExperienceRow from "./components/experience-row";
 import ProjectCard from "./components/project-card";
+import { certifications, education } from "./data/education";
 import { experience } from "./data/experience";
 import { projects } from "./data/projects";
-import { skills } from "./data/skills";
 
 const email = "adebisi.dev@icloud.com";
 
@@ -13,134 +14,110 @@ const socialLinks = [
   { label: "Portfolio", href: "https://ifeoluwadebisi.dev" },
 ];
 
+type SectionProps = {
+  id: string;
+  label: string;
+  children: React.ReactNode;
+};
+
+function Section({ id, label, children }: SectionProps) {
+  return (
+    <section
+      id={id}
+      className="grid scroll-mt-16 gap-8 border-t border-rule pt-8 md:grid-cols-[10rem_1fr] md:gap-12"
+    >
+      <h2 className="text-sm text-ink-faint">{label}</h2>
+      <div>{children}</div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
-    <main className="mx-auto max-w-6xl px-6 py-12">
-      <section className="text-left">
-        <p className="ledger-label text-xs text-accent">Vol. 01 — Engineering Ledger</p>
-        <div className="mt-3">
-          <h1 className="font-serif text-4xl font-semibold text-ink">
-            Hi, I&apos;m Ife,
-          </h1>
-          <h1 className="font-serif text-4xl font-semibold text-ink">
-            a full-stack software engineer
-          </h1>
-          <p className="mt-4 max-w-2xl leading-7 text-ink-muted">
-            As a Software Engineer, I focus on finding accurate, efficient
-            solutions to complex problems. I am driven by a strong curiosity to
-            tackle new challenges and a collaborative mindset that has been a
-            consistent strength throughout my career. My value lies in my
-            technical skill set and my ability to design, build, and navigate
-            software applications effectively.
+    <main className="mx-auto max-w-5xl px-6 sm:px-10">
+      <section className="flex flex-col-reverse gap-10 pb-16 pt-16 md:flex-row md:items-center md:justify-between md:pb-20 md:pt-24">
+        <div>
+          <p className="text-xl text-ink-muted">
+            Hi, I&apos;m Ife, a
           </p>
-        </div>
-        <div className="mt-6 border-t-2 border-double border-rule-strong" />
-      </section>
-
-      <section id="projects" className="mt-14 scroll-mt-20">
-        <div className="flex items-baseline justify-between border-b border-rule pb-2">
-          <h2 className="ledger-label text-sm">
-            <span className="text-accent">(A)</span>{" "}
-            <span className="font-semibold text-ink">Projects</span>
-          </h2>
-          <span className="ledger-label text-xs text-ink-faint">
-            {String(projects.length).padStart(2, "0")} entries
-          </span>
-        </div>
-        <p className="mt-3 text-ink-muted">
-          A selection of projects I&apos;ve built recently.
-        </p>
-        <div className="mt-6 divide-y divide-rule border-y border-rule">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.title}
-              project={project}
-              index={index + 1}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section id="experience" className="mt-14 scroll-mt-20">
-        <div className="flex items-baseline justify-between border-b border-rule pb-2">
-          <h2 className="ledger-label text-sm">
-            <span className="text-accent">(B)</span>{" "}
-            <span className="font-semibold text-ink">Experience</span>
-          </h2>
-          <span className="ledger-label text-xs text-ink-faint">
-            {String(experience.length).padStart(2, "0")} entries
-          </span>
-        </div>
-        <p className="mt-3 text-ink-muted">
-          Where I&apos;ve worked and what I built while I was there.
-        </p>
-        <div className="mt-6 divide-y divide-rule border-y border-rule">
-          {experience.map((role, index) => (
-            <ExperienceRow
-              key={`${role.company}-${role.role}`}
-              experience={role}
-              index={index + 1}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section id="skills" className="mt-14 scroll-mt-20">
-        <div className="border-b border-rule pb-2">
-          <h2 className="ledger-label text-sm">
-            <span className="text-accent">(C)</span>{" "}
-            <span className="font-semibold text-ink">Skills</span>
-          </h2>
-        </div>
-        <p className="mt-3 text-ink-muted">
-          A snapshot of the tools and technologies I work with.
-        </p>
-        <ul className="mt-6 flex flex-wrap gap-2.5">
-          {skills.map((skill) => (
-            <li
-              key={skill.name}
-              className="ledger-label rounded-sm border border-rule-strong bg-paper-elevated px-3 py-1 text-xs text-ink-muted"
+          <h1 className="mt-2 text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+            Full-stack software engineer
+          </h1>
+          <p className="mt-5 max-w-xl leading-7 text-ink-muted">
+            I focus on finding accurate, efficient solutions to complex
+            problems. I&apos;m driven by curiosity for new challenges and a
+            collaborative mindset that has been a consistent strength
+            throughout my career.
+          </p>
+          <div className="mt-6 flex flex-wrap items-baseline gap-x-6 gap-y-2 text-sm">
+            <span className="text-ink">Open to full-stack roles</span>
+            <a
+              href={`mailto:${email}`}
+              className="link text-ink-muted hover:text-ink"
             >
-              {skill.name}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section id="contact" className="mt-14 scroll-mt-20 pb-4">
-        <div className="flex flex-wrap items-start justify-between gap-6">
-          <p className="ledger-label text-sm">
-            <span className="text-accent">(D)</span>{" "}
-            <span className="font-semibold text-ink">Contact</span>
-          </p>
-          <div className="flex flex-col items-end gap-2 font-mono text-sm text-ink-muted">
+              {email}
+            </a>
             {socialLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline decoration-rule-strong underline-offset-4 hover:text-accent"
+                className="link text-ink-muted hover:text-ink"
               >
                 {link.label}
               </a>
             ))}
           </div>
         </div>
-        <p className="mt-4 max-w-sm text-ink-muted">
-          Open to full-stack engineering roles and interesting problems worth
-          digging into. Fastest route is email.
-        </p>
-        <div className="mt-4 flex flex-wrap items-center gap-3">
-          <a
-            href={`mailto:${email}`}
-            className="font-serif text-lg font-semibold text-accent underline decoration-1 underline-offset-4 hover:text-accent-soft"
-          >
-            {email}
-          </a>
-          <CopyEmailButton email={email} />
-        </div>
+        <Image
+          src="/profile.png"
+          alt="Ifeoluwa Adebisi"
+          width={176}
+          height={220}
+          quality={90}
+          priority
+          className="h-30 w-24 shrink-0 rounded-2xl bg-surface object-cover object-top md:h-55 md:w-44"
+        />
       </section>
+
+      <div className="space-y-20 pb-20 md:space-y-24">
+        <Section id="experience" label="Experience">
+          <div className="space-y-12">
+            {experience.map((role) => (
+              <ExperienceRow
+                key={`${role.company}-${role.role}`}
+                experience={role}
+              />
+            ))}
+          </div>
+        </Section>
+
+        {education.length || certifications.length ? (
+          <section
+            id="education"
+            className="scroll-mt-16 border-t border-rule pt-8"
+          >
+            <EducationList
+              education={education}
+              certifications={certifications}
+            />
+          </section>
+        ) : null}
+
+        <Section id="projects" label="Selected work">
+          <div className="space-y-14">
+            {projects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
+          </div>
+        </Section>
+      </div>
+
+      <footer className="flex flex-wrap justify-between gap-4 border-t border-rule py-10 text-sm text-ink-faint">
+        <span>Ifeoluwa Adebisi</span>
+        <span>© {new Date().getFullYear()}</span>
+      </footer>
     </main>
   );
 }

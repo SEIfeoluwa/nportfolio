@@ -1,20 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
+import { Geist } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const ledgerSerif = Source_Serif_4({
-  variable: "--font-ledger-serif",
   subsets: ["latin"],
 });
 
@@ -26,6 +16,11 @@ export const metadata: Metadata = {
   },
 };
 
+const navLinks = [
+  { label: "Experience", href: "/#experience" },
+  { label: "Work", href: "/#projects" },
+];
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,27 +29,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${ledgerSerif.variable} antialiased`}
+        className={`${geistSans.variable} antialiased`}
       >
-        <header className="border-b-4 border-double border-rule-strong bg-paper-elevated">
-          <nav className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5">
-            <Link href="/" className="font-serif text-lg font-semibold text-ink">
-              Ifeoluwa Adebisi
-            </Link>
-            <div className="ledger-label flex items-center gap-6 text-xs text-ink-muted">
-              <Link href="/#projects" className="hover:text-accent">
-                Projects
+        <header className="mx-auto flex max-w-5xl flex-wrap items-baseline justify-between gap-6 px-6 pt-10 sm:px-10">
+          <Link href="/" className="text-sm font-medium text-ink">
+            Ifeoluwa Adebisi
+          </Link>
+          <nav className="flex items-baseline gap-6 text-sm text-ink-muted">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="transition-colors hover:text-ink"
+              >
+                {link.label}
               </Link>
-              <Link href="/#experience" className="hover:text-accent">
-                Experience
-              </Link>
-              <Link href="/#skills" className="hover:text-accent">
-                Skills
-              </Link>
-              <Link href="/#contact" className="hover:text-accent">
-                Contact
-              </Link>
-            </div>
+            ))}
           </nav>
         </header>
         {children}
